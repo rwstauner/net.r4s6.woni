@@ -2,6 +2,38 @@
   (:require [clojure.test :refer [deftest testing is]]
             [net.r4s6.woni.parse :as p]))
 
+(deftest parse-int
+  (testing "int"
+    (is (= 1
+           (p/parse-int "1"))))
+  (testing "zero-padded"
+    (is (= 2
+           (p/parse-int "02"))))
+  (testing "invalid"
+    (is (= nil
+           (p/parse-int "x")))))
+
+(defn local-date
+  [y m d]
+  (java.time.LocalDate/of y m d))
+
+(deftest parse-date
+  (testing "date"
+    (is (= (local-date 2000 12 31)
+           (p/parse-date "12/31/2000"))))
+  (testing "zero-padded"
+    (is (= (local-date 2010 1 2)
+           (p/parse-date "01/02/2010"))))
+  (testing "space padded"
+    (is (= (local-date 2010 3 4)
+           (p/parse-date "3/4/2010"))))
+  (testing "not padded"
+    (is (= (local-date 1999 5 6)
+           (p/parse-date " 5/ 6/1999"))))
+  (testing "invalid"
+    (is (= "123"
+           (p/parse-date "123")))))
+
 (deftest parse-line
   (testing "pipe delimited"
     (is (= ["a" "b" "c"]

@@ -35,6 +35,13 @@
               "Mitchell, Maynard, generals@4077.mash, SlateBlue1, 06/27/1892"]
              lines)))
     (let [lines (main-out-lines "--sort"
+                                "DateOfBirth"
+                                (data-file "enlisted.ssv"))]
+      (is (= ["Klinger, Maxwell, section8@4077.mash, SlateBlue4, 02/26/1920"
+              "Straminsky, Igor, igor@4077.mash, DodgerBlue4, 01/18/1924"
+              "O'Reilly, Walter, radar@4077.mash, WhiteSmoke, 04/15/1926"]
+             lines)))
+    (let [lines (main-out-lines "--sort"
                                 "-LastName"
                                 (data-file "enlisted.ssv"))]
       (is (= ["Straminsky, Igor, igor@4077.mash, DodgerBlue4, 01/18/1924"

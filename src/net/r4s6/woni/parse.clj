@@ -1,5 +1,6 @@
 (ns net.r4s6.woni.parse
-  (:require [clojure.string :as string]))
+  (:require [clojure.string :as string]
+            [net.r4s6.woni.util :as util]))
 
 (def default-columns
   ["LastName"
@@ -7,6 +8,30 @@
    "Email"
    "FavoriteColor"
    "DateOfBirth"])
+
+(defn parse-int
+  "Parse string into integer.
+  Returns nil on failure."
+  [i]
+  (try
+    (Integer/parseInt i)
+    (catch Throwable _
+      nil)))
+
+(defn parse-date
+  "Parse string of M/D/Y into java.time.LocalDate.
+  Returns input string unchanged if it doesn't parse."
+  [s]
+  (let [[m d y] (some-> (re-matches #"^ ?(\d{1,2})\D ?(\d{1,2})\D(\d{4})$" s)
+                        rest ; drop the whole match, just get the capture groups
+                        (->> (map parse-int)))]
+    (if (and m d y)
+      (java.time.LocalDate/of y m d)
+      s)))
+
+(def coercions {"DateOfBirth" parse-date})
+
+(def coerce-fields (partial util/transform-fields coercions))
 
 (def separator-re #"[ ,|]+")
 
@@ -43,7 +68,8 @@
                           [default-columns lines])]
     (->> lines
          (map #(make-record columns (parse-line %)))
-         (filter some?))))
+         (filter some?)
+         (map coerce-fields))))
 
 (defn parse-file
   "Parse file into list of records."

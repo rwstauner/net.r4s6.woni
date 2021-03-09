@@ -2,12 +2,13 @@
   (:require [clojure.string :as string]
             [clojure.tools.cli :as cli]
             [net.r4s6.woni.database :as db]
+            [net.r4s6.woni.format :as fmt]
             [net.r4s6.woni.parse :as p])
   (:gen-class))
 
 (defn format-record
   [record]
-  (string/join ", " (vals record)))
+  (string/join ", " (vals (fmt/format-fields record))))
 
 (defn input-file
   [file]
