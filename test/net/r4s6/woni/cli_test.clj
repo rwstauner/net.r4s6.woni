@@ -47,4 +47,11 @@
       (is (= ["O'Reilly, Walter, radar@4077.mash, WhiteSmoke, 04/15/1926"
               "Klinger, Maxwell, section8@4077.mash, SlateBlue4, 02/26/1920"
               "Straminsky, Igor, igor@4077.mash, DodgerBlue4, 01/18/1924"]
+             lines))))
+  (testing "stdin"
+    (let [input "LastName FirstName\nl f\na b\n"
+          lines (binding [*in* (io/reader (.getBytes input))]
+                  (main-out-lines "--sort" "FirstName" "-"))]
+      (is (= ["a, b"
+              "l, f"]
              lines)))))

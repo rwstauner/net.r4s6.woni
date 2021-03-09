@@ -9,6 +9,12 @@
   [record]
   (string/join ", " (vals record)))
 
+(defn input-file
+  [file]
+  (case file
+    "-" *in*
+    file))
+
 (def cli-options
   [["-?" "--help" "Show usage info"]
    ["-s" "--sort SPEC" "Columns to sort by (default is \"-Email,LastName\")"
@@ -29,7 +35,7 @@
     (if (-> parsed :options :help)
       (println (usage parsed))
       (let [records (reduce (fn [rs file]
-                              (concat rs (p/parse-file file)))
+                              (concat rs (p/parse-file (input-file file))))
                             []
                             (:arguments parsed))
             sorted (db/sort-by-fields (:sort (:options parsed)) records)]
