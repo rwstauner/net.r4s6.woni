@@ -1,7 +1,9 @@
 {:paths ["src" "resources"]
- :deps {org.clojure/clojure {:mvn/version "1.10.2"}}
+ :deps {org.clojure/clojure {:mvn/version "1.10.2"}
+        org.clojure/tools.cli {:mvn/version "1.0.206"}}
  :aliases
- {:test {:extra-paths ["test"]
+ {:run {:main-opts ["-m" "net.r4s6.woni.cli"]}
+  :test {:extra-paths ["test"]
          :extra-deps {org.clojure/test.check {:mvn/version "1.1.0"}}}
   :runner
   {:extra-deps {com.cognitect/test-runner

@@ -14,4 +14,8 @@
   (testing "multi field with descending"
     (is (= [{"L" "c" "F" "z"} {"L" "c" "F" "b"}]
            (db/sort-by-fields ["L" "-F"] [{"L" "c" "F" "z"}
-                                          {"L" "c" "F" "b"}])))))
+                                          {"L" "c" "F" "b"}]))))
+  (testing "unknown field ignored"
+    (is (= [{"L" "c" "F" "b"} {"L" "c" "F" "z"}]
+           (db/sort-by-fields ["L" "-Z" "F"] [{"L" "c" "F" "z"}
+                                              {"L" "c" "F" "b"}])))))
