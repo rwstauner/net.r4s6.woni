@@ -18,6 +18,24 @@ Run the cli passing in input files and optional sort fields:
     record1
     record2
 
+You can specify the paths to multiple input files on the command line.
+A dash indicates STDIN.
+
+The `--sort` parameter is a comma-separated list of field names
+each of which can be prefixed with a dash to indicate descending.
+
+To sort by email descending then last name ascending:
+
+    $ clojure -M:run --sort -Email,LastName resources/data/*.*
+
+Sort by birth date:
+
+    $ clojure -M:run --sort DateOfBirth resources/data/*.*
+
+Sort by last name descending:
+
+    $ clojure -M:run --sort -LastName resources/data/*.*
+
 ### Web Server
 
 To start the http server:
@@ -39,6 +57,9 @@ Example requests:
     $ curl http://localhost:4466/records/email
     $ curl http://localhost:4466/records/birthdate
     $ curl http://localhost:4466/records/name
+
+You can also specify the sort fields in the query string using the same format as the CLI:
+
     $ curl http://localhost:4466/records?sort=-Email,FirstName
 
 
