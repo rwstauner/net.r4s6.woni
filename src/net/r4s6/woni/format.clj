@@ -2,11 +2,11 @@
   (:require [net.r4s6.woni.util :as util]))
 
 (defn format-date
-  "Takes a java.time.LocalDate and formats it as M/D/Y.
+  "Takes a java.time.LocalDate and formats it as M/D/YYYY.
   Returns a string for any input that is not a date."
   [d]
   (try
-    (format "%02d/%02d/%4d"
+    (format "%d/%d/%4d"
             (.getMonthValue d)
             (.getDayOfMonth d)
             (.getYear d))

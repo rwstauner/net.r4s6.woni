@@ -26,34 +26,34 @@
                                 "-Email,LastName"
                                 (data-file "visitors.psv")
                                 (data-file "enlisted.ssv"))]
-      (is (= ["Flagg, Samuel, wind@4077.mash, DarkSlateGray3, 04/15/1918"
-              "Klinger, Maxwell, section8@4077.mash, SlateBlue4, 02/26/1920"
-              "O'Reilly, Walter, radar@4077.mash, WhiteSmoke, 04/15/1926"
-              "Straminsky, Igor, igor@4077.mash, DodgerBlue4, 01/18/1924"
-              "Barker, Wilson, generals@4077.mash, BlanchedAlmond, 02/06/1905"
-              "Clayton, Crandell, generals@4077.mash, PaleGreen3, 07/03/1900"
-              "Mitchell, Maynard, generals@4077.mash, SlateBlue1, 06/27/1892"]
+      (is (= ["Flagg, Samuel, wind@4077.mash, DarkSlateGray3, 4/15/1918"
+              "Klinger, Maxwell, section8@4077.mash, SlateBlue4, 2/26/1920"
+              "O'Reilly, Walter, radar@4077.mash, WhiteSmoke, 4/15/1926"
+              "Straminsky, Igor, igor@4077.mash, DodgerBlue4, 1/18/1924"
+              "Barker, Wilson, generals@4077.mash, BlanchedAlmond, 2/6/1905"
+              "Clayton, Crandell, generals@4077.mash, PaleGreen3, 7/3/1900"
+              "Mitchell, Maynard, generals@4077.mash, SlateBlue1, 6/27/1892"]
              lines)))
     (let [lines (main-out-lines "--sort"
                                 "DateOfBirth"
                                 (data-file "enlisted.ssv"))]
-      (is (= ["Klinger, Maxwell, section8@4077.mash, SlateBlue4, 02/26/1920"
-              "Straminsky, Igor, igor@4077.mash, DodgerBlue4, 01/18/1924"
-              "O'Reilly, Walter, radar@4077.mash, WhiteSmoke, 04/15/1926"]
+      (is (= ["Klinger, Maxwell, section8@4077.mash, SlateBlue4, 2/26/1920"
+              "Straminsky, Igor, igor@4077.mash, DodgerBlue4, 1/18/1924"
+              "O'Reilly, Walter, radar@4077.mash, WhiteSmoke, 4/15/1926"]
              lines)))
     (let [lines (main-out-lines "--sort"
                                 "-LastName"
                                 (data-file "enlisted.ssv"))]
-      (is (= ["Straminsky, Igor, igor@4077.mash, DodgerBlue4, 01/18/1924"
-              "O'Reilly, Walter, radar@4077.mash, WhiteSmoke, 04/15/1926"
-              "Klinger, Maxwell, section8@4077.mash, SlateBlue4, 02/26/1920"]
+      (is (= ["Straminsky, Igor, igor@4077.mash, DodgerBlue4, 1/18/1924"
+              "O'Reilly, Walter, radar@4077.mash, WhiteSmoke, 4/15/1926"
+              "Klinger, Maxwell, section8@4077.mash, SlateBlue4, 2/26/1920"]
              lines)))
     (let [lines (main-out-lines "--sort"
                                 "unknown,fields,-ignored"
                                 (data-file "enlisted.ssv"))]
-      (is (= ["O'Reilly, Walter, radar@4077.mash, WhiteSmoke, 04/15/1926"
-              "Klinger, Maxwell, section8@4077.mash, SlateBlue4, 02/26/1920"
-              "Straminsky, Igor, igor@4077.mash, DodgerBlue4, 01/18/1924"]
+      (is (= ["O'Reilly, Walter, radar@4077.mash, WhiteSmoke, 4/15/1926"
+              "Klinger, Maxwell, section8@4077.mash, SlateBlue4, 2/26/1920"
+              "Straminsky, Igor, igor@4077.mash, DodgerBlue4, 1/18/1924"]
              lines))))
   (testing "stdin"
     (let [input "LastName FirstName\nl f\na b\n"

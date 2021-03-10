@@ -61,18 +61,18 @@
     (let [response (request (-> (mock/request :get "/records/email")))
           body (json/parse-string (:body response))]
       (is (= 200 (:status response)))
-      (is (= {"records" [(record "a" "c" "e1" "03/04/2000")
-                         (record "l" "f" "e2" "01/02/2000")
-                         (record "a" "b" "e3" "01/03/2000")]}
+      (is (= {"records" [(record "a" "c" "e1" "3/4/2000")
+                         (record "l" "f" "e2" "1/2/2000")
+                         (record "a" "b" "e3" "1/3/2000")]}
              body))))
 
   (testing "GET /records/birthdate"
     (let [response (request (-> (mock/request :get "/records/birthdate")))
           body (json/parse-string (:body response))]
       (is (= 200 (:status response)))
-      (is (= {"records" [(record "l" "f" "e2" "01/02/2000")
-                         (record "a" "b" "e3" "01/03/2000")
-                         (record "a" "c" "e1" "03/04/2000")]}
+      (is (= {"records" [(record "l" "f" "e2" "1/2/2000")
+                         (record "a" "b" "e3" "1/3/2000")
+                         (record "a" "c" "e1" "3/4/2000")]}
 
              body))))
 
@@ -80,9 +80,9 @@
     (let [response (request (-> (mock/request :get "/records/name")))
           body (json/parse-string (:body response))]
       (is (= 200 (:status response)))
-      (is (= {"records" [(record "a" "b" "e3" "01/03/2000")
-                         (record "a" "c" "e1" "03/04/2000")
-                         (record "l" "f" "e2" "01/02/2000")]}
+      (is (= {"records" [(record "a" "b" "e3" "1/3/2000")
+                         (record "a" "c" "e1" "3/4/2000")
+                         (record "l" "f" "e2" "1/2/2000")]}
 
              body))))
 
@@ -94,9 +94,9 @@
     (let [response (request (-> (mock/request :get "/records")))
           body (json/parse-string (:body response))]
       (is (= 200 (:status response)))
-      (is (= {"records" [(record "l" "f" "e2" "01/02/2000")
-                         (record "a" "c" "e1" "03/04/2000")
-                         (record "a" "b" "e3" "01/03/2000")]}
+      (is (= {"records" [(record "l" "f" "e2" "1/2/2000")
+                         (record "a" "c" "e1" "3/4/2000")
+                         (record "a" "b" "e3" "1/3/2000")]}
 
              body))))
 
@@ -104,8 +104,8 @@
     (let [response (request (-> (mock/request :get "/records?sort=-LastName,-Email")))
           body (json/parse-string (:body response))]
       (is (= 200 (:status response)))
-      (is (= {"records" [(record "l" "f" "e2" "01/02/2000")
-                         (record "a" "b" "e3" "01/03/2000")
-                         (record "a" "c" "e1" "03/04/2000")]}
+      (is (= {"records" [(record "l" "f" "e2" "1/2/2000")
+                         (record "a" "b" "e3" "1/3/2000")
+                         (record "a" "c" "e1" "3/4/2000")]}
 
              body)))))
