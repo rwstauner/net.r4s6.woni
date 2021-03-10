@@ -2,6 +2,18 @@
   (:require [clojure.test :refer [deftest testing is]]
             [net.r4s6.woni.database :as db]))
 
+(deftest store
+  (db/truncate!)
+  (testing "insert!"
+    (is (= 1 (db/insert! [{"a" "b"}]))))
+  (testing "get-all"
+    (is (= [{"a" "b"}]
+           (db/get-all))))
+  (testing "truncate!"
+    (db/truncate!)
+    (is (= []
+           (db/get-all)))))
+
 (deftest sort-by-fields
   (testing "single field"
     (is (= [{"L" "a"} {"L" "b"}]

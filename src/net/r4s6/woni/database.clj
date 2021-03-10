@@ -1,6 +1,26 @@
 (ns net.r4s6.woni.database
   (:require [clojure.string :as string]))
 
+(def store (atom []))
+
+(defn insert!
+  "Insert records into the datastore.
+  Returns number of rows inserted."
+  [records]
+  (let [c (count @store)]
+    (swap! store concat records)
+    (- (count @store) c)))
+
+(defn truncate!
+  "Remove all records from store."
+  []
+  (reset! store []))
+
+(defn get-all
+  "Returns list of all stored records."
+  []
+  @store)
+
 (defn sort-by-fields
   "Sort records by list of fields.
   Field specs are column names optionally prefixed with a \"-\" to indicate descending order.
