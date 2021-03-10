@@ -5,6 +5,8 @@ Your data: Was Outside, Now Inside.
 
 ## Usage
 
+This project uses the latest `clj` tool (1.10.2) with `deps.edn`.
+
 ### CLI
 
 For usage info:
