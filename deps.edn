@@ -1,10 +1,19 @@
 {:paths ["src" "resources"]
  :deps {org.clojure/clojure {:mvn/version "1.10.2"}
-        org.clojure/tools.cli {:mvn/version "1.0.206"}}
+        org.clojure/tools.cli {:mvn/version "1.0.206"}
+        http-kit/http-kit {:mvn/version "2.5.3"}
+        compojure/compojure {:mvn/version "1.6.2" }
+        ring/ring-json {:mvn/version "0.5.0"}
+        ring-logger/ring-logger {:mvn/version "1.0.1"}}
  :aliases
  {:run {:main-opts ["-m" "net.r4s6.woni.cli"]}
+  :web {:ns-default net.r4s6.woni.web
+          :exec-fn serve
+          :exec-args {:port 4466}}
   :test {:extra-paths ["test"]
-         :extra-deps {org.clojure/test.check {:mvn/version "1.1.0"}}}
+         :extra-deps {org.clojure/test.check {:mvn/version "1.1.0"}
+                      cheshire/cheshire {:mvn/version "5.9.0"} ; ring-json
+                      ring/ring-mock {:mvn/version "0.4.0"}}}
   :runner
   {:extra-deps {com.cognitect/test-runner
                 {:git/url "https://github.com/cognitect-labs/test-runner"
