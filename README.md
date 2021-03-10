@@ -30,7 +30,7 @@ Ctrl-C to stop it.
 
 Example requests:
 
-    $ curl -v --data-binary @resources/data/enlisted.ssv -X POST http://localhost:4466/records
+    $ curl -v -H "Content-type: text/plain" --data-binary @resources/data/enlisted.ssv http://localhost:4466/records
     $ curl -v http://localhost:4466/records/email
 
 

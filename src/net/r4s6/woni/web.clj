@@ -7,6 +7,7 @@
             [org.httpkit.server :as server]
             [ring.logger :as rl]
             [ring.middleware.json :as rj]
+            [ring.middleware.params :as rp]
             [ring.util.response :refer [response]]))
 
 (defn respond-with-records
@@ -26,6 +27,8 @@
                   "birthdate" ["DateOfBirth"]
                   "name" ["LastName" "FirstName"]})
 
+(def sort-qs (comp p/parse-line str))
+
 (defroutes base-api
   (routes
    (POST "/records" request
@@ -36,11 +39,15 @@
    (GET "/records/:sort-spec" [sort-spec :<< sort-action]
      (return-all sort-spec))
 
+   (GET "/records" [sort :<< sort-qs]
+     (return-all sort))
+
    (not-found {:status 404})))
 
 (defn api
   [& {:keys [log-fn] :or {log-fn println}}]
   (-> base-api
+      (rp/wrap-params)
       (rj/wrap-json-response)
       (rl/wrap-log-response {:log-fn log-fn})))
 
