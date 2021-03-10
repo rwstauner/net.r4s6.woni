@@ -63,7 +63,8 @@
   (let [head (some-> lines
                      first
                      parse-line)
-        [columns lines] (if (and head (header? head))
+        ; If there's more than one line does the first line look like field names?
+        [columns lines] (if (and head (seq (rest lines)) (header? head))
                           [head (rest lines)]
                           [default-columns lines])]
     (->> lines

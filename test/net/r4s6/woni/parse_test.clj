@@ -72,6 +72,12 @@
            (p/parse-records ["l, f, e, fc, dob"
                              "a, b, c, d, e"]))))
 
+  (testing "parse single line"
+    (is (= []
+           (p/parse-records ["FavoriteColor"])))
+    (is (= [{"LastName" "FavoriteColor" "FirstName" "foo" "Email" "bar" "FavoriteColor" "baz" "DateOfBirth" "qux"}]
+           (p/parse-records ["FavoriteColor, foo, bar, baz, qux"]))))
+
   (testing "drops rows that do not parse correctly"
     (is (= [{"LastName" "a" "FirstName" "b" "Email" "c" "FavoriteColor" "d" "DateOfBirth" "e"}]
            (p/parse-records ["a.b.c"
