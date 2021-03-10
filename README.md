@@ -28,6 +28,11 @@ To start the http server:
 or you can use `bin/web`.
 Ctrl-C to stop it.
 
+To specify the port:
+
+    $ clojure -X:web :port 5000
+    listening on http://localhost:5000
+
 Example requests:
 
     $ curl -v -H "Content-type: text/plain" --data-binary @resources/data/enlisted.ssv http://localhost:4466/records
