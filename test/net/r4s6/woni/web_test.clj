@@ -43,6 +43,9 @@
     (let [response (request (-> (mock/request :post "/records")
                                 (mock/body "x")))]
       (is (= 422 (:status response)))))
+  (testing "POST no body"
+    (let [response (request (-> (mock/request :post "/records")))]
+      (is (= 422 (:status response)))))
   (testing "POST unaccepted content-type"
     (let [response (request (-> (mock/request :post "/records")
                                 (mock/body "LastName\nl\nz")

@@ -31,10 +31,14 @@
 
 (defroutes base-api
   (routes
-   (POST "/records" request
-     (if (> (db/insert! (p/parse-file (:body request))) 0)
-       {:status 204}
-       {:status 422}))
+   (POST "/records" {:keys [body]}
+     (let [saved? (some-> body
+                          (p/parse-file)
+                          (db/insert!)
+                          (> 0))]
+       (if saved?
+         {:status 204}
+         {:status 422})))
 
    (GET "/records/:sort-spec" [sort-spec :<< sort-action]
      (return-all sort-spec))
